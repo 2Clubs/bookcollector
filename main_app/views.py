@@ -6,5 +6,4 @@ def home(request):
     return HttpResponse('Hello')
 
 def about(request):
-    return HttpResponse('<h1>About the BookCollector</h1>')
-
+    return render(request, 'about.html')
