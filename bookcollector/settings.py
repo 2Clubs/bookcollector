@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4=p+o3c7!#5q@51japq_1+^b-$k!%(xk0z#ez!el0r9nkn3m%n'
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': '2Clubs/bookcollector',
         'USER': '2Clubs',
-        'PASSWORD': 'v2_43QfT_j9mRMdf7MYndXnQ45tALXY2',
+        'PASSWORD': str(os.getenv('PASSWORD')),
         'HOST': 'db.bit.io',
         'PORT': '5432',
     }
