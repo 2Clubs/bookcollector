@@ -16,6 +16,10 @@ class Book(models.Model):
     def get_absolute_url(self):
         return reverse("detail", kwargs={"book_id": self.id})
     
+class Reading(models.Model):
+    date = models.DateTimeField()
+    notes = models.CharField(max_length=500)
+    
 # books = [
 #     Book('Moby-Dick', 'Herman Melville', 'Penguin Books', 2003),
 #     Book('Hard Times', 'Charles Dickens', 'Broadview Press', 2000),
