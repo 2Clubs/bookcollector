@@ -2,6 +2,11 @@ from django.db import models
 from django.urls import reverse
 from isbn_field import ISBNField
 
+FORMAT = (
+    ('E', 'E-Reader'),
+    ('H', 'Hard Copy'),
+)
+
 # Create your models here.
 class Book(models.Model):
     title = models.CharField(max_length=100)
@@ -18,7 +23,15 @@ class Book(models.Model):
     
 class Reading(models.Model):
     date = models.DateTimeField()
+    format = models.CharField(
+        max_length=1,
+        choices=FORMAT,
+        default=FORMAT[0][0],
+        )
     notes = models.CharField(max_length=500)
+    
+    def __str__(self):
+        return f"{self.get_format_display() on (self.date)}"
     
 # books = [
 #     Book('Moby-Dick', 'Herman Melville', 'Penguin Books', 2003),
