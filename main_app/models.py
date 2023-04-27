@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from isbn_field import ISBNField
 
 # Create your models here.
@@ -12,6 +13,9 @@ class Book(models.Model):
     def __str__(self):
         return self.title
         
+    def get_absolute_url(self):
+        return reverse("detail", kwargs={"book_id": self.id})
+    
 # books = [
 #     Book('Moby-Dick', 'Herman Melville', 'Penguin Books', 2003),
 #     Book('Hard Times', 'Charles Dickens', 'Broadview Press', 2000),
