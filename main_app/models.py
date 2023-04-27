@@ -1,12 +1,12 @@
 from django.db import models
+from isbn_field import ISBNField
 
 # Create your models here.
-class Book:
-    def __init__(self, title, author, publisher, year):
-        self.title = title
-        self.author = author
-        self.publisher = publisher
-        self.year = year
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.CharField(max_length=100)
+    publisher = models.CharField(max_length=100)
+    isbn = ISBNField(clean_isbn=True, max_length=20)
         
 books = [
     Book('Moby-Dick', 'Herman Melville', 'Penguin Books', 2003),
