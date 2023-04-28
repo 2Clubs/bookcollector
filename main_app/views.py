@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Book
 from .forms import ReadingForm
@@ -18,6 +18,14 @@ def books_detail(request, book_id):
     book = Book.objects.get(id=book_id)
     reading_form = ReadingForm()
     return render(request, 'books/detail.html', { 'book': book, 'reading_form': reading_form })
+
+def add_reading(request, book_id):
+    form = ReadingForm(request.POST)
+    if form.is_valid():
+        new_reading = form.save(commit=False)
+        new_reading.book_id = book_id
+        new_reading.save()
+    return redirect('detail', book_id=book_id)
 
 class BookCreate(CreateView):
     model = Book

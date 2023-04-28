@@ -22,7 +22,7 @@ class Book(models.Model):
         return reverse("detail", kwargs={"book_id": self.id})
     
 class Reading(models.Model):
-    date = models.DateTimeField('reading date')
+    date = models.DateField('reading date')
     format = models.CharField(
         max_length=1,
         choices=FORMAT,
@@ -34,6 +34,9 @@ class Reading(models.Model):
     
     def __str__(self):
         return f"{self.get_format_display()} on {(self.date)}"
+    
+    class Meta:
+        ordering = ['-date']
     
 # books = [
 #     Book('Moby-Dick', 'Herman Melville', 'Penguin Books', 2003),
