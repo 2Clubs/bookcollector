@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from isbn_field import ISBNField
+from django.contrib.auth.models import User
 
 FORMAT = (
     ('H', 'Hard Copy'),
@@ -25,6 +26,7 @@ class Book(models.Model):
     isbn = ISBNField(clean_isbn=True, max_length=20)
     
     genre = models.ManyToManyField(Genre)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     # override __str__ method
     def __str__(self):
