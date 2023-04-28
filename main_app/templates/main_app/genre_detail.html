@@ -1,0 +1,18 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>Genre Details</h1>
+
+<div class="card">
+    <a href="{% url 'genre_detail' genre.id %}">
+        <div class="card-content">
+            <span class="card-title">{{ genre.name }}</span>
+            <span class="card-description">{{ genre.description }}</span>
+        </div>
+    </a>
+    <div class="card-action">
+        <a href="{% url 'genre_update' genre.id %}">Edit</a>
+        <a href="{% url 'genre_delete' genre.id %}">Delete</a>
+    </div>
+</div>
+
+{% endblock %}

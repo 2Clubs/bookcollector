@@ -7,12 +7,24 @@ FORMAT = (
     ('E', 'E-Reader'),
 )
 
-# Create your models here.
+class Genre(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.CharField(max_length=500)
+        
+    def __str__(self):
+        return f"{self.name}"
+    
+    def get_absolute_url(self):
+        return reverse("genre_detail", kwargs={"pk": self.id})
+    
+
 class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
     publisher = models.CharField(max_length=100)
     isbn = ISBNField(clean_isbn=True, max_length=20)
+    
+    genre = models.ManyToManyField(Genre)
     
     # override __str__ method
     def __str__(self):

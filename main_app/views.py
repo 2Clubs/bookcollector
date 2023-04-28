@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .models import Book
+from .models import Book, Genre
 from .forms import ReadingForm
 
 # Create your views here.
@@ -38,3 +39,21 @@ class BookUpdate(UpdateView):
 class BookDelete(DeleteView):
     model = Book
     success_url = '/books/'
+    
+class GenreIndex(ListView):
+  model = Genre
+
+class GenreDetail(DetailView):
+  model = Genre
+  
+class GenreCreate(CreateView):
+  model = Genre
+  fields = '__all__'
+
+class GenreUpdate(UpdateView):
+  model = Genre
+  fields = '__all__'
+
+class GenreDelete(DeleteView):
+  model = Genre
+  success_url = '/genre/'
