@@ -35,7 +35,11 @@ def assoc_genre(request, book_id, genre_id):
 
 class BookCreate(CreateView):
     model = Book
-    fields = '__all__'
+    fields = ('title', 'author', 'publisher', 'isbn')
+    
+    def form_valid(self, form):
+      form.instance.user = self.request.user
+      return super().form_valid(form)
     
 class BookUpdate(UpdateView):
     model = Book
