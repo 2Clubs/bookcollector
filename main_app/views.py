@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 from .models import Book, Genre
 from .forms import ReadingForm
 
@@ -32,6 +34,20 @@ def add_reading(request, book_id):
 def assoc_genre(request, book_id, genre_id):
     Book.objects.get(id=book_id).genre.add(genre_id)
     return redirect('detail', book_id=book_id)
+  
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+      form = UserCreationForm(request.POST)
+      if form.is_valid():
+        user = form.save()
+        login(request, user)
+        return redirect('index')
+      else:
+        error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)  
 
 class BookCreate(CreateView):
     model = Book
