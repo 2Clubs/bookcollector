@@ -3,8 +3,8 @@ from django.urls import reverse
 from isbn_field import ISBNField
 
 FORMAT = (
-    ('E', 'E-Reader'),
     ('H', 'Hard Copy'),
+    ('E', 'E-Reader'),
 )
 
 # Create your models here.
@@ -22,7 +22,7 @@ class Book(models.Model):
         return reverse("detail", kwargs={"book_id": self.id})
     
 class Reading(models.Model):
-    date = models.DateTimeField()
+    date = models.DateTimeField('reading date')
     format = models.CharField(
         max_length=1,
         choices=FORMAT,
@@ -30,8 +30,10 @@ class Reading(models.Model):
         )
     notes = models.CharField(max_length=500)
     
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    
     def __str__(self):
-        return f"{self.get_format_display() on (self.date)}"
+        return f"{self.get_format_display()} on {(self.date)}"
     
 # books = [
 #     Book('Moby-Dick', 'Herman Melville', 'Penguin Books', 2003),

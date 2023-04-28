@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Book
+from .forms import ReadingForm
 
 # Create your views here.
 def home(request):
@@ -15,7 +16,8 @@ def books_index(request):
 
 def books_detail(request, book_id):
     book = Book.objects.get(id=book_id)
-    return render(request, 'books/detail.html', { 'book': book })
+    reading_form = ReadingForm()
+    return render(request, 'books/detail.html', { 'book': book, 'reading_form': reading_form })
 
 class BookCreate(CreateView):
     model = Book
