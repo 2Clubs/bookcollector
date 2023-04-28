@@ -14,7 +14,7 @@ def about(request):
     return render(request, 'about.html')
 
 def books_index(request):
-    books = Book.objects.all()
+    books = Book.objects.filter(user=request.user)
     return render(request, 'books/index.html', { 'books': books })
 
 def books_detail(request, book_id):
