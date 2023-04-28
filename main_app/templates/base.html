@@ -24,7 +24,11 @@
         <div class="nav-wrapper">
           <ul>
             <li>
-              <a href="/" class="left brand-logo">  BookCollector</a>
+              {% if user.is_authenticated %}
+              <a href="/" class="left brand-logo">BookCollector - {{ user.username }}</a>
+              {% else %}
+              <a href="/" class="left brand-logo">BookCollector</a>
+              {% endif %}
             </li>
           </ul>
           <ul class="right">
