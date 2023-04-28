@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+# ISBNField functionality found here: https://github.com/secnot/django-isbn-field
 from isbn_field import ISBNField
 from django.contrib.auth.models import User
 
